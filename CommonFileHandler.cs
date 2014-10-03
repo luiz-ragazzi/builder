@@ -9,12 +9,20 @@ namespace builder
 {
     public class CommonFileHandler
     {
+        /// <summary>
+        /// Seleciona arquivos
+        /// Financial.*, com extensão .dll e Aquivos com extensão . compiled
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <returns></returns>
         public static IEnumerable<FileInfo> GetFiles(DirectoryInfo directory)
         {
-            //Pegar os arquivos Financial.*, .compiled e  Financial.*(.dll)
+            //Pegar os arquivos Financial.*, com extensão .dll
+            var financialFiles =  directory.GetFiles().Where(s => s.Name.Remove(s.Name.Length - s.Extension.Length, s.Extension.Length).Length >= 9).Where(x => x.Name.Substring(0, 9).ToLower() == "financial").Where(f => f.Extension == ".dll").ToArray();
+            //concatena com os compiled
+            return directory.GetFiles().Where(x => x.Extension == ".compiled").Concat(financialFiles).ToArray();
             
             
-            return directory.GetFiles().Where(s => s.Extension == ".dll" || s.Extension == ".compiled" || s.Name.Remove(s.Name.Length - s.Extension.Length, s.Extension.Length).ToLower() == "financial").ToArray();
             
         }
     }
