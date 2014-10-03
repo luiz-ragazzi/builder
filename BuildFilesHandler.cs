@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//*Master
 namespace Financial.Builder
 {
     public class BuildFilesHandler
@@ -18,7 +19,7 @@ namespace Financial.Builder
             string binPath = Path.Combine(pastaDeploy, "bin");
           
             var sb = new StringBuilder();
-            var files = Directory.GetFiles(binPath);
+            
 
             //na pasta \bin
             var directoryInfo = new DirectoryInfo(binPath);
@@ -55,13 +56,21 @@ namespace Financial.Builder
             var configs = directoryRoot.GetFiles("*.config");
             foreach (var item in configs)
             {
-                item.Delete();
+                if (item.Name.ToLower() == "web.config")
+                    item.Delete();
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Arquivos removidos com sucesso!");
 
             
+        }
+
+
+        public static void CopyFile(FileInfo fi, string destination)
+        {
+
+            fi.CopyTo(destination, true);
         }
     }
 }
