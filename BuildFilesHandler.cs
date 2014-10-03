@@ -1,4 +1,5 @@
-﻿using System;
+﻿using builder;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Financial.Builder
 
             //na pasta \bin
             var directoryInfo = new DirectoryInfo(binPath);
-            var fixedFiles = directoryInfo.GetFiles().Where(s => s.Extension == ".dll" || s.Extension == ".compiled" || s.Name.Remove(s.Name.Length - s.Extension.Length, s.Extension.Length).ToLower() == "financial");
+            var fixedFiles = CommonFileHandler.GetFiles(directoryInfo);
 
             var allFiles = directoryInfo.GetFiles();
             foreach (var item in allFiles)

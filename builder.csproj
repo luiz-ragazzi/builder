@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildFilesHandler.cs" />
+    <Compile Include="CommonFileHandler.cs" />
     <Compile Include="IProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TheBuild.cs" />
